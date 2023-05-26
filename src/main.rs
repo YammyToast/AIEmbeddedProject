@@ -1,5 +1,5 @@
 mod core;
 
 fn main() {
-    core::scheduler::run()
+    let lifetimes = core::scheduling::scheduler::init_lifetime_vec();
 }
