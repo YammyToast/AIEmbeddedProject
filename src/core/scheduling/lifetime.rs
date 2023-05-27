@@ -15,7 +15,7 @@ pub struct LifetimeInstance {
 
 impl LifetimeInstance {
     // Not sure whether static is the correct call here!
-    fn bound_module_spawn(mut self) -> Result<Vec<Executable>, ()> {
+    fn bound_module_spawn(mut self) -> Result<Vec<Box<Executable>>, ()> {
         let spawn_result = self.bound_module.spawn();
         match spawn_result {
             Err(e) => Err(e),

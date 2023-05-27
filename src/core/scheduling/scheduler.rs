@@ -4,6 +4,8 @@ use uuid::Uuid;
 
 use crate::core::scheduling::LifetimeInstance;
 
+use super::executable::Executable;
+
 pub fn init_lifetime_vec() -> Box<HashMap<Uuid, Box<LifetimeInstance>>> {
     // After each iteration, lifetimes are called to determine whether they want to add to the queue.
     // Vector of lifetimes current alive in this context.
@@ -12,10 +14,10 @@ pub fn init_lifetime_vec() -> Box<HashMap<Uuid, Box<LifetimeInstance>>> {
     lifetimes
 }
 
-pub fn init_queue() -> Rc<VecDeque<Box<i32>>> {
+pub fn init_queue() -> Rc<VecDeque<Box<Executable>>> {
     // Reference Counted Double-ended Queue for executing lifetime (module) functions.
     // Main Execution Queue.
-    let schedule_queue: Rc<VecDeque<Box<i32>>> = Rc::new(VecDeque::new());
+    let schedule_queue: Rc<VecDeque<Box<Executable>>> = Rc::new(VecDeque::new());
     schedule_queue
 }
 
