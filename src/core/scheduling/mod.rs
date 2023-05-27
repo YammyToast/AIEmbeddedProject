@@ -1,8 +1,13 @@
+use self::lifetime::LifetimeInstance;
+use self::executable::Executable;
+
 pub mod scheduler;
 pub mod lifetime;
+pub mod executable;
 
 pub trait Schedulable {
-    fn spawn() -> Result<Vec<i32>, ()>;
-    fn delete_callback() -> bool;
-    fn log_string() -> str;
+    fn spawn(&self) -> Result<Vec<Executable>, ()>;
+    fn delete_callback(&self) -> bool;
+    fn debug_string(&self) -> &str;
+    fn execute(&self);
 }

@@ -1,14 +1,15 @@
-use std::collections::VecDeque;
+use std::collections::{HashMap, VecDeque};
 use std::rc::Rc;
+use uuid::Uuid;
 
-use crate::core::scheduling::lifetime;
+use crate::core::scheduling::LifetimeInstance;
 
-pub fn init_lifetime_vec() -> Box<Vec<Box<i32>>> {
+pub fn init_lifetime_vec() -> Box<HashMap<Uuid, Box<LifetimeInstance>>> {
     // After each iteration, lifetimes are called to determine whether they want to add to the queue.
     // Vector of lifetimes current alive in this context.
     // Each lifetime is queried during each iteration of the scheduling process to create program functionality.
-    let lifetimes: Box<Vec<Box<i32>>> = Box::new(vec![]);
-    return lifetimes;
+    let lifetimes: Box<HashMap<Uuid, Box<LifetimeInstance>>> = Box::new(HashMap::new());
+    lifetimes
 }
 
 pub fn init_queue() -> Rc<VecDeque<Box<i32>>> {
