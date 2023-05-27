@@ -5,7 +5,7 @@ use uuid::Uuid;
 
 use crate::core::scheduling::{Schedulable, Executable};
 
-pub struct LifetimeInstance<'a> {
+pub struct LifetimeInstance {
     uuid: Uuid,
     priority: i8,
     bound_module: Box<dyn Schedulable>,
@@ -13,9 +13,9 @@ pub struct LifetimeInstance<'a> {
     executables_spawned: u32
 }
 
-impl LifetimeInstance<'_> {
+impl LifetimeInstance {
     // Not sure whether static is the correct call here!
-    fn bound_module_spawn(mut self) -> Result<Vec<Executable<'static>>, ()> {
+    fn bound_module_spawn(mut self) -> Result<Vec<Executable>, ()> {
         let spawn_result = self.bound_module.spawn();
         match spawn_result {
             Err(e) => Err(e),

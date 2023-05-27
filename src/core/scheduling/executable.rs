@@ -1,9 +1,9 @@
 
 use uuid::Uuid;
 
-pub struct Executable<'a> {
+pub struct Executable {
     lifetime_uuid: Uuid,
-    execution_function: &'a fn(),
+    execution_function: &'static fn(),
     
 
 }

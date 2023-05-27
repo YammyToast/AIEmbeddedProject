@@ -10,7 +10,7 @@ struct Logger {
 
 impl Schedulable for Logger {
     fn spawn(&self) -> Result<Vec<Executable>, ()> {
-
+        
         Err(())
     }
 
