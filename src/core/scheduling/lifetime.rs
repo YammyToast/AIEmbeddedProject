@@ -6,9 +6,9 @@ use uuid::Uuid;
 use crate::core::scheduling::{Executable, Schedulable};
 
 pub struct LifetimeInstance {
-    uuid: Uuid,
-    priority: i8,
-    bound_module: Box<dyn Schedulable>,
+    pub uuid: Uuid,
+    pub priority: i8,
+    pub bound_module: Box<dyn Schedulable>,
     spawn_timestamp: DateTime<Utc>,
     executables_spawned: u32,
 }

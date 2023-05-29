@@ -34,7 +34,13 @@ impl ExecutablesQueue {
     pub fn reschedule_queue(mut self, _lifetimes: LifetimeMap) {
         (*self.que).clear();     
         for lifetime in _lifetimes.map.values() {
-
+            let executables = match (**lifetime).bound_module.spawn(lifetime) {
+                Err(_) => continue,
+                Ok(vec) => vec
+            };
+            for exec in executables {
+                (*self.que).push_back(exec)
+            }
 
         }
 
@@ -54,7 +60,6 @@ impl ExecutablesQueue {
             // Call pointer to execution function.
             front_execution_function()
         }
-
     }
 
 }
