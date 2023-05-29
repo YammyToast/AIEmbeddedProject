@@ -18,11 +18,22 @@ impl LifetimeMap {
         }
     }
 
+
     pub fn add_lifetime(mut self, _lifetime: Box<LifetimeInstance>) -> bool {
         match self.map.contains_key(&(*_lifetime).uuid) {
             true => false,
             false => {
                 self.map.insert((*_lifetime).uuid, _lifetime);
+                true
+            } 
+        }
+    }
+
+    pub fn remove_lifetime(mut self, _lifetime: Box<LifetimeInstance>) -> bool {
+        match self.map.contains_key(&(*_lifetime).uuid) {
+            true => false,
+            false => {
+                self.map.remove(&(*_lifetime).uuid);
                 true
             } 
         }
