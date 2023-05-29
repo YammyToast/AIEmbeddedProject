@@ -6,7 +6,6 @@ use uuid::Uuid;
 use crate::core::scheduling::LifetimeInstance;
 
 use super::executable::Executable;
-use super::lifetime;
 
 pub struct LifetimeMap {
     map: Box<HashMap<Uuid, Box<LifetimeInstance>>>,
@@ -18,6 +17,18 @@ impl LifetimeMap {
             map: Box::new(HashMap::new())
         }
     }
+
+    pub fn add_lifetime(mut self, _lifetime: Box<LifetimeInstance>) -> bool {
+        match self.map.contains_key(&(*_lifetime).uuid) {
+            true => false,
+            false => {
+                self.map.insert((*_lifetime).uuid, _lifetime);
+                true
+            } 
+        }
+    }
+
+
 }
 
 pub struct ExecutablesQueue {
