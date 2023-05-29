@@ -6,6 +6,7 @@ use uuid::Uuid;
 use crate::core::scheduling::LifetimeInstance;
 
 use super::executable::Executable;
+use super::lifetime;
 
 pub struct LifetimeMap {
     map: Box<HashMap<Uuid, Box<LifetimeInstance>>>,
@@ -20,18 +21,22 @@ impl LifetimeMap {
 }
 
 pub struct ExecutablesQueue {
-    que: Rc<VecDeque<Box<Executable>>>,
+    que: Box<VecDeque<Box<Executable>>>,
 }
 
 impl ExecutablesQueue {
     pub fn new() -> ExecutablesQueue {
         ExecutablesQueue {
-            que: Rc::new(VecDeque::new()) 
+            que: Box::new(VecDeque::new()) 
         }
     }
 
-    pub fn reschedule_queue(self) {
-        
+    pub fn reschedule_queue(mut self, _lifetimes: LifetimeMap) {
+        (*self.que).clear();     
+        for lifetime in _lifetimes.map.values() {
+
+
+        }
 
     }
 
@@ -52,13 +57,4 @@ impl ExecutablesQueue {
 
     }
 
-}
-
-
-pub fn reschedule_queue(
-    _lifetimes: LifetimeMap,
-    _schedule_queue: &mut ExecutablesQueue,
-) {
-    let test = Rc::get_mut(&mut _schedule_queue.que);
-    todo!()
 }
